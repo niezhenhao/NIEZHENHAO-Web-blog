@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>欢迎来到我的个人网站 - 完整文章</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            color: #5a5a5a;
+        }
+        h1, h2 {
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        nav {
+            background-color: rgba(255, 105, 180, 0.8);
+            border-radius: 0 0 20px 20px;
+        }
+        nav ul li a {
+            color: white;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            background-color: #ff1493;
+            border-radius: 15px;
+        }
+        .content {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: rgba(255, 105, 180, 0.8);
+            border-radius: 20px 20px 0 0;
+        }
+        .social-links {
+            margin-bottom: 10px;
+        }
+        .social-links a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+        .snowflake {
+            color: #fff;
+            position: fixed;
+            top: -10px;
+            z-index: 9999;
+            user-select: none;
+            cursor: default;
+            animation-name: snowfall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+    <script src="snowfall.js" defer></script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="images.html">图片</a></li>
+            <li><a href="music.html">音乐</a></li>
+            <li><a href="login.html">登录</a></li>
+            <li><a href="register.html">注册</a></li>
+            <li><a href="admin-login.html">后台管理</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <header>
+            <h1>欢迎来到我的个人网站</h1>
+        </header>
+        <main>
+            <article>
+                <p>这是我的第一个网页，我将在这里分享我的学习经历和个人兴趣。希望通过这个网站，我能够记录自己的成长，也希望能为其他人提供有价值的信息。欢迎大家常来访问！</p>
+                <h2>关于我</h2>
+                <p>我是一名热爱技术的学生，对网页开发和编程充满热情。这个网站是我学习HTML、CSS和JavaScript的实践项目。</p>
+                <h2>我的目标</h2>
+                <p>通过这个网站，我希望能够：</p>
+                <ul>
+                    <li>记录我的学习过程</li>
+                    <li>分享有趣的技术发现</li>
+                    <li>与其他对技术感兴趣的人交流</li>
+                    <li>不断改进我的网页开发技能</li>
+                </ul>
+                <h2>未来计划</h2>
+                <p>我计划在未来添加更多功能到这个网站，包括：</p>
+                <ul>
+                    <li>个人博客系统</li>
+                    <li>项目展示页面</li>
+                    <li>技术教程分享</li>
+                    <li>与访客互动的留言板</li>
+                </ul>
+                <p>感谢您访问我的网站。如果您有任何建议或想法，欢迎通过下方的社交媒体联系我！</p>
+            </article>
+        </main>
+        <footer>
+            <div class="social-links">
+                <a href="https://www.douyin.com/user/YOUR_DOUYIN_ID" target="_blank">抖音</a> |
+                <a href="https://space.bilibili.com/1872324150?spm_id_from=333.937.0.0" target="_blank">哔哩哔哩</a> |
+                <a href="tencent://message/?uin=YOUR_QQ_NUMBER&Site=&Menu=yes">QQ</a>
+            </div>
+            <p>&copy; 2024 我的网页。保留所有权利。 聂真豪制作勿抄袭</p>
+            <p>当前时间: <span id="currentTime"></span></p>
+        </footer>
+    </div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

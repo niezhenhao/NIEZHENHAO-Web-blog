@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 复制login.html中的样式 */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            color: #5a5a5a;
+        }
+        h1 {
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        nav {
+            background-color: rgba(255, 105, 180, 0.8);
+            padding: 10px 0;
+            border-radius: 0 0 20px 20px;
+            border: 2px solid #ff69b4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        nav ul {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #ff1493;
+        }
+        .content {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            border-radius: 15px;
+            border: 2px solid #ff69b4;
+        }
+        .button {
+            background-color: #ff69b4;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .checkbox-container input {
+            margin-right: 10px;
+        }
+        footer {
+            background-color: rgba(255, 105, 180, 0.8);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .email-verification {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .email-verification input[type="text"] {
+            width: 60%;
+        }
+
+        .email-verification button {
+            width: 35%;
+            padding: 10px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .email-verification button:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="images.html">图片</a></li>
+            <li><a href="music.html">音乐</a></li>
+            <li><a href="login.html">登录</a></li>
+            <li><a href="register.html">注册</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="admin-login.html">后台管理</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <header>
+            <h1>注册页面</h1>
+        </header>
+        <main>
+            <form id="registerForm">
+                <input type="text" name="username" placeholder="用户名" required>
+                <input type="email" name="email" placeholder="电子邮箱" required>
+                <div class="email-verification">
+                    <input type="text" name="verificationCode" placeholder="验证码" required>
+                    <button type="button" id="sendVerificationCode">发送验证码</button>
+                </div>
+                <input type="password" name="password" placeholder="密码" required>
+                <input type="password" name="confirmPassword" placeholder="确认密码" required>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="savePassword" name="savePassword">
+                    <label for="savePassword">保存密码</label>
+                </div>
+                <input type="submit" value="注册" class="button">
+            </form>
+            <p>已有账号? <a href="login.html" class="button">立即登录</a></p>
+        </main>
+        <footer>
+            <div class="social-links">
+                <a href="https://www.douyin.com/user/YOUR_DOUYIN_ID" target="_blank">抖音</a> |
+                <a href="https://space.bilibili.com/1872324150?spm_id_from=333.937.0.0" target="_blank">哔哩哔哩</a> |
+                <a href="tencent://message/?uin=YOUR_QQ_NUMBER&Site=&Menu=yes">QQ</a>
+            </div>
+            <p>&copy; 2024 我的网页。保留所有权利。 聂真豪制作勿抄袭</p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('sendVerificationCode').addEventListener('click', function() {
+            const email = document.querySelector('input[name="email"]').value;
+            if (!email) {
+                alert('请先输入电子邮箱!');
+                return;
+            }
+
+            // 生成一个6位数的随机验证码
+            const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            // 将验证码保存到 localStorage
+            localStorage.setItem('verificationCode', verificationCode);
+            
+            // 在控制台显示验证码（仅用于演示）
+            console.log('验证码:', verificationCode);
+            
+            // 显示提示信息
+            alert('验证码已生成。请查看浏览器控制台以获取验证码。在实际应用中，这将通过邮件发送。');
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = this.username.value;
+            const email = this.email.value;
+            const verificationCode = this.verificationCode.value;
+            const password = this.password.value;
+            const confirmPassword = this.confirmPassword.value;
+
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致!');
+                return;
+            }
+
+            // 检查验证码
+            const storedVerificationCode = localStorage.getItem('verificationCode');
+            if (verificationCode !== storedVerificationCode) {
+                alert('验证码错误!');
+                return;
+            }
+
+            // 保存用户信息
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push({
+                username: username,
+                email: email,
+                password: password
+            });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // 保存当前注册的用户信息
+            localStorage.setItem('currentUser', JSON.stringify({username, email}));
+
+            alert('注册成功!');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

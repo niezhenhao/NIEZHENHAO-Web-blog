@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我的可爱小站</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* 导航栏样式 */
+        nav {
+            background-color: rgba(255, 105, 180, 0.8);
+            padding: 10px 0;
+            border-radius: 0 0 20px 20px;
+            border: 2px solid #ff69b4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #ff1493;
+        }
+        /* 欢迎图片和文字样式 */
+        .welcome-image-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .welcome-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+        }
+        .welcome-text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        /* 文章列表样式 */
+        .article-list {
+            margin-top: 20px;
+        }
+        .article-item {
+            background-color: #5696ba;
+            border: 2px solid #ffc0cb;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        .article-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(108, 20, 20, 0.1);
+        }
+        .article-item a {
+            color: #ffffff; /* 设置文字颜色为白色 */
+            text-decoration: none;
+        }
+        .article-item h3 {
+            color: #ffffff; /* 设置标题颜色为白色 */
+            margin-top: 0;
+        }
+        .article-item p {
+            color: #f0f0f0; /* 设置段落文字颜色为浅灰色 */
+        }
+        /* 访问量计数器样式 */
+        #visitor-count {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ff69b4;
+        }
+
+        .entrance-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://s21.ax1x.com/2024/10/17/pAUlOmT.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: transform 0.5s ease-out;
+        }
+
+        .entrance-image.slide-up {
+            transform: translateY(-100%);
+        }
+
+        .entrance-text {
+            font-size: 7em;
+            color: rgb(243, 248, 244);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .main-content {
+            display: none;
+        }
+
+        .content {
+            background-image: url('https://s21.ax1x.com/2024/10/17/pAU1Sh9.jpg');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: -1;
+            border-radius: 20px;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            color: transparent; /* 将文字颜色设置为透明 */
+            background-image: url('https://s21.ax1x.com/2024/10/17/pAU12C9.jpg');
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #ff1493;
+        }
+
+        .pagination button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="images.html"><i class="fas fa-images"></i> 图片</a></li>
+            <li><a href="music.html"><i class="fas fa-music"></i> 音乐</a></li>
+            <li><a href="entertainment.html"><i class="fas fa-gamepad"></i> 娱乐</a></li>
+            <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+            <li><a href="register.html"><i class="fas fa-user-plus"></i> 注册</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> 归档</a></li>
+            <li><a href="admin-login.html"><i class="fas fa-user-shield"></i> 后台管理</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> 关于</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <header>
+            <div class="welcome-image-container">
+                <img src="https://s21.ax1x.com/2024/10/17/pANTgA0.jpg" alt="欢迎图片" class="welcome-image">
+                <div class="welcome-text-overlay">星阿浩破站小屋</div>
+            </div>
+            <h1>欲买桂花同载酒，终不似，少年游。</h1>
+        </header>
+        <main>
+            <p>这里是充满爱与梦想的小天地~ 🌈✨</p>
+            
+            <!-- 文章列表 -->
+            <div class="article-list" id="articleList"></div>
+            
+            <!-- 分页控件 -->
+            <div class="pagination">
+                <button id="prevPage" onclick="changePage(-1)">上一页</button>
+                <button id="nextPage" onclick="changePage(1)">下一页</button>
+            </div>
+
+            <!-- 访问量计数器 -->
+            <div id="visitor-count">
+                访问量: <span id="count">0</span>
+            </div>
+        </main>
+        <footer>
+            <div class="social-links">
+                <a href="https://www.douyin.com/user/YOUR_DOUYIN_ID" target="_blank">抖音</a> |
+                <a href="https://space.bilibili.com/1872324150?spm_id_from=333.937.0.0" target="_blank">哔哩哔哩</a> |
+                <a href="tencent://message/?uin=YOUR_QQ_NUMBER&Site=&Menu=yes">QQ</a>
+            </div>
+            <p>欲买桂花同载酒，终不似，少年游。</p>
+            <p>&copy; 2024 我的网页。保留所有权利。 聂真豪制作勿抄袭</p>
+            <p>当前时间: <span id="currentTime"></span></p>
+        </footer>
+    </div>
+
+    <div class="entrance-image">
+        <div class="entrance-text">星阿浩破站小屋</div>
+    </div>
+
+    <div class="main-content">
+        <!-- 原有的页面内容 -->
+    </div>
+
+    <script>
+        const articlesPerPage = 3;
+        let currentPage = 1;
+
+        function displayArticles() {
+            const articleList = document.getElementById('articleList');
+            articleList.innerHTML = '';
+
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            const startIndex = (currentPage - 1) * articlesPerPage;
+            const endIndex = startIndex + articlesPerPage;
+            const pageArticles = articles.slice(startIndex, endIndex);
+
+            pageArticles.forEach((article, index) => {
+                const articleElement = document.createElement('div');
+                articleElement.className = 'article-item';
+                
+                articleElement.innerHTML = `
+                    <a href="article.html?id=${startIndex + index}">
+                        ${article.image ? `<img src="${article.image}" alt="${article.title}" style="width: 100px; height: 100px; object-fit: cover; float: left; margin-right: 15px;">` : ''}
+                        <h3>${article.title}</h3>
+                        <p>${article.content.substring(0, 100)}...</p>
+                        <p>发布日期：${article.date}</p>
+                    </a>
+                `;
+                
+                articleList.appendChild(articleElement);
+            });
+
+            document.getElementById('prevPage').disabled = (currentPage === 1);
+            document.getElementById('nextPage').disabled = (endIndex >= articles.length);
+        }
+
+        function changePage(delta) {
+            currentPage += delta;
+            displayArticles();
+        }
+
+        function updateVisitorCount() {
+            let count = localStorage.getItem('visitorCount') || 0;
+            count = parseInt(count) + 1;
+            localStorage.setItem('visitorCount', count);
+            document.getElementById('count').textContent = count;
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        // 页面加载时初始化
+        window.addEventListener('load', function() {
+            displayArticles();
+            updateVisitorCount();
+            updateTime();
+            setInterval(updateTime, 1000);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const entranceImage = document.querySelector('.entrance-image');
+            const mainContent = document.querySelector('.main-content');
+
+            entranceImage.addEventListener('click', function() {
+                entranceImage.classList.add('slide-up');
+                setTimeout(() => {
+                    entranceImage.style.display = 'none';
+                    mainContent.style.display = 'block';
+                }, 500);
+            });
+        });
+    </script>
+    <!-- 引入樱花效果脚本 -->
+    <script src="https://api.vvhan.com/api/script/yinghua"></script>
+</body>
+</html>

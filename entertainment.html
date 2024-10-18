@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>娱乐页面</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* 娱乐页面特有样式 */
+        .game-container {
+            text-align: center;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+        }
+        .game-button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .game-button:hover {
+            background-color: #ff1493;
+        }
+        #game-result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff69b4;
+        }
+        /* 导航栏样式 */
+        nav {
+            background-color: rgba(255, 105, 180, 0.8);
+            padding: 10px 0;
+            border-radius: 0 0 20px 20px;
+            border: 2px solid #ff69b4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #ff1493;
+        }
+        /* 视频播放器样式 */
+        .video-container {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+        }
+        .video-container h2 {
+            color: #ff69b4;
+            margin-bottom: 15px;
+        }
+        .video-player {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .video-player video {
+            width: 100%;
+            display: block;
+        }
+
+        /* 悬浮窗口样式 */
+        .floating-menu {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .floating-menu button {
+            display: block;
+            width: 100%;
+            padding: 5px 10px;
+            margin: 5px 0;
+            border: none;
+            background-color: #ff69b4;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .floating-menu button:hover {
+            background-color: #ff1493;
+        }
+
+        /* 夜间模式样式 */
+        body.night-mode {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+
+        body.night-mode .content,
+        body.night-mode .game-container,
+        body.night-mode .video-container {
+            background-color: rgba(52, 73, 94, 0.8);
+            color: #ecf0f1;
+        }
+
+        body.night-mode h1, body.night-mode h2 {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="images.html"><i class="fas fa-images"></i> 图片</a></li>
+            <li><a href="music.html"><i class="fas fa-music"></i> 音乐</a></li>
+            <li><a href="entertainment.html"><i class="fas fa-gamepad"></i> 娱乐</a></li>
+            <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+            <li><a href="register.html"><i class="fas fa-user-plus"></i> 注册</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> 归档</a></li>
+            <li><a href="admin-login.html"><i class="fas fa-user-shield"></i> 后台管理</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <header>
+            <h1>娱乐页面</h1>
+        </header>
+        <main>
+            <div class="game-container">
+                <h2>猜数字游戏</h2>
+                <p>猜一个1到100之间的数字：</p>
+                <input type="number" id="guess-input" min="1" max="100">
+                <button class="game-button" onclick="checkGuess()">猜！</button>
+                <p id="game-result"></p>
+            </div>
+            <div class="video-container">
+                <h2>精彩视频</h2>
+                <div class="video-player">
+                    <video controls>
+                        <source src="video/BMjAyNDEwMTcyMDE0MjRfMTQzMDEyODYyNV8xNDYzMDEyODQw.mp4" type="video/mp4">
+                        您的浏览器不支持 HTML5 视频。
+                    </video>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="social-links">
+                <a href="https://www.douyin.com/user/YOUR_DOUYIN_ID" target="_blank">抖音</a> |
+                <a href="https://space.bilibili.com/1872324150?spm_id_from=333.937.0.0" target="_blank">哔哩哔哩</a> |
+                <a href="tencent://message/?uin=YOUR_QQ_NUMBER&Site=&Menu=yes">QQ</a>
+            </div>
+            <p>&copy; 2024 我的网页。保留所有权利。 聂真豪制作勿抄袭</p>
+            <p>当前时间: <span id="currentTime"></span></p>
+        </footer>
+    </div>
+    <script>
+        let targetNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guess-input').value);
+            attempts++;
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                document.getElementById('game-result').textContent = "请输入1到100之间的有效数字！";
+            } else if (guess === targetNumber) {
+                document.getElementById('game-result').textContent = `恭喜你猜对了！答案就是 ${targetNumber}。你用了 ${attempts} 次尝试。`;
+                targetNumber = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+            } else if (guess < targetNumber) {
+                document.getElementById('game-result').textContent = "猜小了，再试试！";
+            } else {
+                document.getElementById('game-result').textContent = "猜大了，再试试！";
+            }
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // 语言切换功能
+        function changeLanguage(lang) {
+            if (lang === 'en') {
+                document.querySelector('h1').textContent = 'Entertainment Page';
+                document.querySelector('.game-container h2').textContent = 'Number Guessing Game';
+                document.querySelector('.game-container p').textContent = 'Guess a number between 1 and 100:';
+                document.querySelector('.game-button').textContent = 'Guess!';
+                document.querySelector('.video-container h2').textContent = 'Featured Video';
+            } else {
+                document.querySelector('h1').textContent = '娱乐页面';
+                document.querySelector('.game-container h2').textContent = '猜数字游戏';
+                document.querySelector('.game-container p').textContent = '猜一个1到100之间的数字：';
+                document.querySelector('.game-button').textContent = '猜！';
+                document.querySelector('.video-container h2').textContent = '精彩视频';
+            }
+        }
+
+        // 主题切换功能
+        function toggleTheme() {
+            document.body.classList.toggle('night-mode');
+            const themeButton = document.querySelector('.floating-menu button:last-child');
+            if (document.body.classList.contains('night-mode')) {
+                themeButton.textContent = '切换到白天模式';
+            } else {
+                themeButton.textContent = '切换到夜间模式';
+            }
+        }
+    </script>
+    <!-- 悬浮窗口 -->
+    <div class="floating-menu">
+        <button onclick="changeLanguage('zh')">简体中文</button>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="toggleTheme()">切换主题</button>
+    </div>
+</body>
+</html>

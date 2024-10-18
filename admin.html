@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            color: #5a5a5a;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background-color: rgba(41, 210, 204, 0.8);
+            padding: 10px 0;
+            border-radius: 0 0 20px 20px;
+            border: 2px solid #474ad8;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #2785c9;
+        }
+
+        nav ul li a i {
+            margin-right: 5px;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: #474ad8;
+            text-align: center;
+        }
+
+        /* 添加边框样式 */
+        .admin-section {
+            margin-bottom: 2rem;
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #474ad8;
+            box-shadow: 0 0 10px rgba(71, 74, 216, 0.2);
+        }
+
+        /* 修改表格样式 */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            border: 1px solid #474ad8;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #474ad8;
+            color: white;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 修改按钮样式 */
+        .action-link, .approve-btn, .delete-btn, #logoutButton {
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .action-link {
+            color: #474ad8;
+            border: 1px solid #474ad8;
+        }
+
+        .action-link:hover {
+            background-color: #474ad8;
+            color: white;
+        }
+
+        .approve-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        #logoutButton {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        #logoutButton:hover {
+            background-color: #d32f2f;
+        }
+
+        /* 修改评论项样式 */
+        .comment-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* 修改新文章表单样式 */
+        #newArticleForm {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #474ad8;
+        }
+
+        #newArticleForm input[type="text"],
+        #newArticleForm textarea,
+        #newArticleForm select,
+        #newArticleForm input[type="color"],
+        #newArticleForm input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #newArticleForm button {
+            background-color: #474ad8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #newArticleForm button:hover {
+            background-color: #3238be;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(41, 210, 204, 0.8);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="images.html"><i class="fas fa-images"></i> 图片</a></li>
+            <li><a href="music.html"><i class="fas fa-music"></i> 音乐</a></li>
+            <li><a href="entertainment.html"><i class="fas fa-gamepad"></i> 娱乐</a></li>
+            <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+            <li><a href="register.html"><i class="fas fa-user-plus"></i> 注册</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> 归档</a></li>
+            <li><a href="admin-login.html"><i class="fas fa-user-shield"></i> 后台管理</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <header>
+            <h1>后台管理</h1>
+            <button id="logoutButton">登出</button>
+        </header>
+        <main id="adminContent" style="display: none;">
+            <!-- 添加新文章表单 -->
+            <section class="admin-section">
+                <h2>发布新文章</h2>
+                <form id="newArticleForm" enctype="multipart/form-data">
+                    <input type="text" id="articleTitle" placeholder="文章标题" required>
+                    <div class="font-controls">
+                        <select id="articleFont">
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="'Times New Roman', serif">Times New Roman</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                            <option value="Georgia, serif">Georgia</option>
+                            <option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino</option>
+                        </select>
+                        <input type="color" id="articleColor" value="#000000">
+                    </div>
+                    <textarea id="articleContent" rows="10" placeholder="文章内容" required></textarea>
+                    <button type="button" onclick="autoFormat()">自动排版</button>
+                    <div class="image-selection">
+                        <label for="articleImage">选择文章图片：</label>
+                        <input type="file" id="articleImage" accept="image/*" multiple>
+                    </div>
+                    <div id="imagePreview"></div>
+                    <button type="submit">发布文章</button>
+                </form>
+            </section>
+            
+            <!-- 文章管理 -->
+            <section class="admin-section">
+                <h2>文章管理</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>标题</th>
+                            <th>发布日期</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="articleList">
+                        <!-- 文章列表将在这里动态添加 -->
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- 用户管理 -->
+            <section class="admin-section">
+                <h2>用户管理</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>邮箱</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList">
+                        <!-- 用户列表将在这里动态添加 -->
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- 评论管理部分 -->
+            <section class="admin-section">
+                <h2>评论管理</h2>
+                <div id="commentManagement"></div>
+            </section>
+            
+            <!-- 在 admin.html 文件中添加日志生成部分 -->
+            <section class="admin-section">
+                <h2>日志生成</h2>
+                <div id="logContent"></div>
+                <button onclick="downloadLog()">下载日志</button>
+            </section>
+        </main>
+        <footer>
+            <div class="social-links">
+                <a href="https://www.douyin.com/user/YOUR_DOUYIN_ID" target="_blank">抖音</a> |
+                <a href="https://space.bilibili.com/1872324150?spm_id_from=333.937.0.0" target="_blank">哔哩哔哩</a> |
+                <a href="tencent://message/?uin=YOUR_QQ_NUMBER&Site=&Menu=yes">QQ</a>
+            </div>
+            <p>&copy; 2024 我的网页。保留所有权利。 聂真豪制作勿抄袭</p>
+            <p>当前时间: <span id="currentTime"></span></p>
+        </footer>
+    </div>
+    <script>
+        // 检查管理员是否已登录
+        function checkAdminLogin() {
+            const adminLoggedIn = localStorage.getItem('adminLoggedIn');
+            if (adminLoggedIn !== 'true') {
+                window.location.href = 'admin-login.html';
+            } else {
+                document.getElementById('adminContent').style.display = 'block';
+            }
+        }
+
+        // 页面加载时检查登录状态
+        window.onload = checkAdminLogin;
+
+        // 添加登出功能
+        function adminLogout() {
+            localStorage.removeItem('adminLoggedIn');
+            window.location.href = 'admin-login.html';
+        }
+
+        // 添加登出按钮事件监听
+        document.getElementById('logoutButton').addEventListener('click', adminLogout);
+
+        // 保留原有的时间更新脚本
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // 修改发布新文章的功能
+        document.getElementById('newArticleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('articleTitle').value;
+            const content = document.getElementById('articleContent').value;
+            const font = document.getElementById('articleFont').value;
+            const color = document.getElementById('articleColor').value;
+            const imageFiles = document.getElementById('articleImage').files;
+            
+            const images = [];
+            const promises = [];
+
+            for (let i = 0; i < imageFiles.length; i++) {
+                const promise = new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        images.push(e.target.result);
+                        resolve();
+                    };
+                    reader.readAsDataURL(imageFiles[i]);
+                });
+                promises.push(promise);
+            }
+
+            Promise.all(promises).then(() => {
+                saveArticle(title, content, font, color, images);
+            });
+        });
+
+        // 日志生成功能
+        let logEntries = [];
+
+        function addLogEntry(action) {
+            const timestamp = new Date().toLocaleString();
+            const logEntry = `${timestamp}: ${action}`;
+            logEntries.push(logEntry);
+            updateLogDisplay();
+        }
+
+        function updateLogDisplay() {
+            const logContent = document.getElementById('logContent');
+            logContent.innerHTML = logEntries.join('<br>');
+        }
+
+        function downloadLog() {
+            const logText = logEntries.join('\n');
+            const blob = new Blob([logText], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'admin_log.txt';
+            a.click();
+        }
+
+        // 修改现有的函数以添加日志记录
+        function saveArticle(title, content, font, color, images) {
+            let articles = JSON.parse(localStorage.getItem('articles')) || [];
+            
+            // 将换行符转换为 <br> 标签
+            content = content.replace(/\n/g, '<br>');
+            
+            articles.unshift({
+                title: title,
+                content: content,
+                date: new Date().toLocaleString(),
+                font: font,
+                color: color,
+                images: images
+            });
+            
+            localStorage.setItem('articles', JSON.stringify(articles));
+            
+            alert('文章发布成功！');
+            
+            // 重置表单
+            document.getElementById('newArticleForm').reset();
+            document.getElementById('imagePreview').innerHTML = '';
+
+            // 刷新文章列表
+            displayArticles();
+
+            addLogEntry(`发布新文章: ${title}`);
+        }
+
+        // 显示文章列表
+        function displayArticles() {
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            const articleTable = document.querySelector('.admin-section:nth-child(2) table tbody');
+            articleTable.innerHTML = ''; // 清空现有内容
+            
+            articles.forEach((article, index) => {
+                const row = articleTable.insertRow();
+                row.innerHTML = `
+                    <td>${article.title}</td>
+                    <td>${article.date}</td>
+                    <td>
+                        <a href="#" class="action-link" onclick="editArticle(${index})">编辑</a>
+                        <a href="#" class="action-link" onclick="deleteArticle(${index})">删除</a>
+                    </td>
+                `;
+            });
+        }
+
+        // 编辑文章功能
+        function editArticle(index) {
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            const article = articles[index];
+            
+            document.getElementById('articleTitle').value = article.title;
+            document.getElementById('articleContent').value = article.content;
+            document.getElementById('articleFont').value = article.font;
+            document.getElementById('articleColor').value = article.color;
+            
+            // 将表单提交事件改为更新文章
+            document.getElementById('newArticleForm').onsubmit = function(e) {
+                e.preventDefault();
+                articles[index].title = document.getElementById('articleTitle').value;
+                articles[index].content = document.getElementById('articleContent').value;
+                articles[index].font = document.getElementById('articleFont').value;
+                articles[index].color = document.getElementById('articleColor').value;
+                articles[index].date = new Date().toLocaleString();
+                
+                localStorage.setItem('articles', JSON.stringify(articles));
+                alert('文章更新成功！');
+                displayArticles();
+                
+                // 重置表单
+                this.reset();
+                this.onsubmit = null; // 移除这个特殊的提交处理
+            };
+
+            addLogEntry(`编辑文章: ${articles[index].title}`);
+        }
+
+        // 删除文章功能
+        function deleteArticle(index) {
+            if (confirm('确定要删除这篇文章吗？')) {
+                let articles = JSON.parse(localStorage.getItem('articles')) || [];
+                articles.splice(index, 1);
+                localStorage.setItem('articles', JSON.stringify(articles));
+                displayArticles();
+
+                addLogEntry(`删除文章: ${articles[index].title}`);
+            }
+        }
+
+        // 显示用户列表
+        function displayUsers() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userTable = document.getElementById('userList');
+            userTable.innerHTML = ''; // 清空现有内容
+            
+            users.forEach((user, index) => {
+                const row = userTable.insertRow();
+                row.innerHTML = `
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>
+                        <a href="#" class="action-link" onclick="deleteUser(${index})">删除</a>
+                    </td>
+                `;
+            });
+        }
+
+        // 删除用户功能
+        function deleteUser(index) {
+            if (confirm('确定要删除这个用户吗？')) {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                users.splice(index, 1);
+                localStorage.setItem('users', JSON.stringify(users));
+                displayUsers();
+
+                addLogEntry(`删除用户: ${users[index].username}`);
+            }
+        }
+
+        // 加载所有评论
+        function loadAllComments() {
+            const comments = JSON.parse(localStorage.getItem('comments')) || {};
+            const commentManagement = document.getElementById('commentManagement');
+            commentManagement.innerHTML = '';
+
+            let hasComments = false;
+
+            for (let articleId in comments) {
+                comments[articleId].forEach((comment, index) => {
+                    hasComments = true;
+                    const commentElement = document.createElement('div');
+                    commentElement.className = 'comment-item';
+                    commentElement.innerHTML = `
+                        <p><strong>文章ID: ${articleId === 'index' ? '首页' : articleId}</strong></p>
+                        <p><strong>${comment.author}</strong> - ${comment.date}</p>
+                        <p>${comment.content}</p>
+                        <div class="comment-actions">
+                            <button class="delete-btn" onclick="deleteComment('${articleId}', ${index})">删除评论</button>
+                        </div>
+                    `;
+                    commentManagement.appendChild(commentElement);
+                });
+            }
+
+            if (!hasComments) {
+                commentManagement.innerHTML = '<p>暂无评论</p>';
+            }
+        }
+
+        // 删除评论
+        function deleteComment(articleId, index) {
+            let comments = JSON.parse(localStorage.getItem('comments')) || {};
+            if (comments[articleId]) {
+                comments[articleId].splice(index, 1);
+                if (comments[articleId].length === 0) {
+                    delete comments[articleId];
+                }
+                localStorage.setItem('comments', JSON.stringify(comments));
+                loadAllComments();
+
+                addLogEntry(`删除评论: 文章ID ${articleId}, 评论索引 ${index}`);
+            }
+        }
+
+        // 在页面加载时显示文章
+        window.addEventListener('load', function() {
+            checkAdminLogin();
+            displayArticles();
+            displayUsers();
+            loadAllComments();
+            updateTime();
+            updateLogDisplay();
+        });
+
+        function autoFormat() {
+            let content = document.getElementById('articleContent').value;
+            
+            // 1. 删除多余的空行
+            content = content.replace(/\n{3,}/g, '\n\n');
+            
+            // 2. 确保段落之间有空行
+            content = content.replace(/([^\n])\n([^\n])/g, '$1\n\n$2');
+            
+            // 3. 删除行首和行尾的空格
+            content = content.replace(/^\s+|\s+$/gm, '');
+            
+            // 4. 确保标点符号后有一个空格（中文除外）
+            content = content.replace(/([.,!?:;])((?=[a-zA-Z]))/g, '$1 $2');
+            
+            // 5. 将多个空格替换为单个空格
+            content = content.replace(/ +/g, ' ');
+            
+            // 6. 确保每个段落以大写字母开头（英文）
+            content = content.replace(/\n\n([a-z])/g, function(match, p1) {
+                return '\n\n' + p1.toUpperCase();
+            });
+            
+            document.getElementById('articleContent').value = content;
+        }
+
+        // 图片预览和选择功能
+        document.getElementById('articleImage').addEventListener('change', function(event) {
+            const imagePreview = document.getElementById('imagePreview');
+            imagePreview.innerHTML = '';
+            const files = event.target.files;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width = '100px';
+                    img.style.height = '100px';
+                    img.style.objectFit = 'cover';
+                    img.style.margin = '5px';
+                    imagePreview.appendChild(img);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

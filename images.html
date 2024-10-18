@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>图片页面</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 基本样式 */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #3878b4 0%, #bbe8f8 100%);
+            color: #18c0e1;
+        }
+        h1, h2 {
+            color: #92298d;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background-color: rgba(37, 129, 209, 0.8);
+            padding: 10px 0;
+            border-radius: 0 0 20px 20px;
+            border: 2px solid #d41cb0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        nav ul {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #ff1493;
+        }
+
+        /* 内容区域样式 */
+        .content {
+            background-color: rgba(29, 183, 230, 0.9);
+            border-radius: 40px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        /* 轮播图样式 */
+        .slideshow-container {
+            max-width: 800px;
+            position: relative;
+            margin: auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+            border: 5px solid #ff69b4;
+        }
+        .mySlides {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 60px;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(255, 105, 180, 0.8);
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(255, 20, 147, 0.8);
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: rgba(12, 133, 189, 0.8);
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            .content {
+                padding: 10px;
+                max-width: 100%;
+            }
+            nav ul li {
+                display: block;
+                margin: 5px 0;
+            }
+            .slideshow-container {
+                max-width: 100%;
+            }
+            .prev, .next {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            .content {
+                padding: 5px;
+            }
+        }
+
+        /* 社交链接样式 */
+        .social-links {
+            margin-bottom: 10px;
+        }
+        .social-links a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 飘雪效果 */
+        .snowflake {
+            color: #fff;
+            position: fixed;
+            top: -10px;
+            z-index: 9999;
+            user-select: none;
+            cursor: default;
+            animation-name: snowfall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+    <!-- 引入飘雪效果脚本 -->
+    <script src="snowfall.js" defer></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="images.html">图片</a></li>
+            <li><a href="music.html">音乐</a></li>
+            <li><a href="login.html">登录</a></li>
+            <li><a href="register.html">注册</a></li>
+            <li><a href="archive.html">归档</a></li>
+            <li><a href="admin-login.html">后台管理</a></li>
+        </ul>
+    </nav>
+    <!-- 主要内容区域 -->
+    <div class="content">
+        <header>
+            <h1>图片页面</h1>
+        </header>
+        <main>
+            <!-- 轮播图容器 -->
+            <div class="slideshow-container">
+                <div class="mySlides">
+                    <img src="https://picsum.photos/600/400?random=1" alt="随机图片1">
+                </div>
+                <div class="mySlides">
+                    <img src="https://picsum.photos/600/400?random=2" alt="随机图片2">
+                </div>
+                <div class="mySlides">
+                    <img src="https://picsum.photos/600/400?random=3" alt="随机图片3">
+                </div>
+                <!-- 前后切换按钮 -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+        </main>
+        <!-- 页脚 -->
+        <footer>
+            <div class="social-links">
+                <a href="https://www.douyin.com/user/YOUR_DOUYIN_ID" target="_blank">抖音</a> |
+                <a href="https://space.bilibili.com/1872324150?spm_id_from=333.937.0.0" target="_blank">哔哩哔哩</a> |
+                <a href="tencent://message/?uin=YOUR_QQ_NUMBER&Site=&Menu=yes">QQ</a>
+            </div>
+            <p>欲买桂花同载酒，终不似，少年游。</p>
+            <p>&copy; 2024 我的网页。保留所有权利。 聂真豪制作勿抄袭</p>
+            <p>当前时间: <span id="currentTime"></span></p>
+        </footer>
+    </div>
+    <script>
+        // 轮播图功能
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // 切换到下一张或上一张图片
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // 显示指定索引的图片
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        // 自动轮播
+        setInterval(function() {
+            plusSlides(1);
+        }, 4000); // 每4秒切换一次图片
+
+        // 更新当前时间
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        // 初始化时间并每秒更新一次
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

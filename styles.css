@@ -1,0 +1,142 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #8FB2C9 0%, #7FA1B8 100%); /* 创建一个轻微的渐变效果 */
+    color: #5a5a5a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    color: #ff69b4;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(255, 105, 180, 0.8);
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1rem;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+nav {
+    background-color: transparent;
+    padding: 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 1rem;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: rgba(255, 105, 180, 0.8);
+    color: white;
+    border-radius: 20px 20px 0 0;
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ff1493;
+}
+
+.button {
+    background-color: #ff69b4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #ff1493;
+    transform: scale(1.05);
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ff69b4;
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        padding: 1rem;
+    }
+    nav ul li {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+}
+
+.snowflake {
+    color: #fff;
+    position: fixed;
+    top: -10px;
+    z-index: 9999;
+    user-select: none;
+    cursor: default;
+    animation-name: snowfall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes snowfall {
+    0% { transform: translateY(-10px); }
+    100% { transform: translateY(100vh); }
+}
